@@ -15,5 +15,7 @@ class Chiral_Orthogonal: public Chiral{
 		void Create_ProjectionMatrices(MatrixXcd* C1_pointer, MatrixXcd* C2_pointer, int N1, int N2);
 
 		void Create_H(MatrixXcd* H_pointer, int _ress, double _lambda);
+		
+		void Save_txt_files_Channels(MatrixXcd G, MatrixXcd P, int num_steps);
 };
 #endif

@@ -238,3 +238,20 @@ void Chiral_Orthogonal::Create_H(MatrixXcd* H_pointer, int ress, double _lambda)
 	*H_pointer = H;
 }
 
+void Chiral_Orthogonal::Save_txt_files_Channels(MatrixXcd G, MatrixXcd P, int num_steps){
+	std::ofstream output_G("Data_Analysis/Channel/Dirac_G_O_Channel.txt");
+	std::ofstream output_P("Data_Analysis/Channel/Dirac_P_O_Channel.txt");
+
+	for(int i = 0; i < num_steps; i++){
+		for (int j = 0; j < 10; j++){
+			if (j == 9){
+				output_G << G(i,j).real() << std::endl;
+				output_P << P(i,j).real() << std::endl;
+			}
+			else{
+				output_G << G(i,j).real() << "\t";
+				output_P << P(i,j).real() << "\t";
+			}
+		}
+	}	
+}

@@ -13,3 +13,9 @@ Chiral::Chiral() {};
 Chiral::~Chiral() {};
 
 void Chiral::Create_W(MatrixXcd* W_pointer, int _ress, int N1, int N2, double _lambda, double y) {};
+
+void Chiral::Create_ProjectionMatrices(MatrixXcd* C1_pointer, MatrixXcd* C2_pointer, int N1, int N2) {};
+
+void Chiral::Create_H(MatrixXcd* H_pointer, int _ress, double _lambda) {};
+
+void Chiral::Save_txt_files_Channels(MatrixXcd G, MatrixXcd P, int num_steps) {};

@@ -62,10 +62,30 @@ void Chiral::Run_Simulation_Conductance_Channels(){
 			MatrixXcd* H_pointer = &H;
 
 			Create_H(H_pointer, ress, _lambda);
+	
+			// Create billiard setup //
+			
+			Quantum_chaotic_billiard billiard_setup(H, W, C1, C2);
+
+			// Scattering Matrix //
+
+			billiard_setup.Calculate_Smatrix();
+
+			// Conductance (G) and Power Shot Noise (P) //
+			
+			billiard_setup.Calculate_G_and_P();
+
+			G(step-1, N1-1) = billiard_setup.getG();
+			P(step-1, N1-1) = billiard_setup.getP();
+
+			if (step % 1000000 == 0){
+				std::cout << "\nCurrent number of steps: " << step << "| Current number of open channels (N): " << N1 << std::endl;
+			}
 		}
 
-
-
+		// Save G and P matrices as txt files //
+		
+		Save_txt_files_Channels(G, P, _num_steps);
 
 	}
 
