@@ -52,7 +52,8 @@ void Chiral::Run_Simulation_Conductance_Channels(){
 		MatrixXcd *C2_pointer = &C2;
 
 		Create_ProjectionMatrices(C1_pointer, C2_pointer, N1, N2);
-
+		
+		#pragma omp parallel for shared(W, C1, C2)
 		for (int step = 1; step < _num_steps + 1; step++){
 			
 			// Generate Hamiltonian Matrix //
@@ -78,7 +79,7 @@ void Chiral::Run_Simulation_Conductance_Channels(){
 			G(step-1, N1-1) = billiard_setup.getG();
 			P(step-1, N1-1) = billiard_setup.getP();
 
-			if (step % 1000000 == 0){
+			if (step % _num_steps == 0){
 				std::cout << "\nCurrent number of steps: " << step << "| Current number of open channels (N): " << N1 << std::endl;
 			}
 		}
