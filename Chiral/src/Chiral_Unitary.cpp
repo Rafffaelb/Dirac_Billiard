@@ -1,6 +1,6 @@
 #include <iostream>
 #include <eigen3/Eigen/Dense>
-#include "../include/Chiral_Orthogonal.h"
+#include "../include/Chiral_Unitary.h"
 #include "../include/Auxiliary_Functions.h"
 #include <cmath>
 #include <complex>
@@ -12,7 +12,7 @@
 
 using namespace std;
 
-Chiral_Orthogonal::Chiral_Orthogonal(double lambda, int num_steps, int spin_deg, int chiral_deg){
+Chiral_Unitary::Chiral_Unitary(double lambda, int num_steps, int spin_deg, int chiral_deg){
 
 	this -> _lambda = lambda;
 	this -> _num_steps = num_steps;
@@ -20,9 +20,9 @@ Chiral_Orthogonal::Chiral_Orthogonal(double lambda, int num_steps, int spin_deg,
 	this -> _chiral_deg = chiral_deg;
 }
 
-Chiral_Orthogonal::~Chiral_Orthogonal() {}
+Chiral_Unitary::~Chiral_Unitary() {}
 
-void Chiral_Orthogonal::Create_W(MatrixXcd* W_pointer, int ress, int N1, int N2, double lambda, double y){
+void Chiral_Unitary::Create_W(MatrixXcd* W_pointer, int ress, int N1, int N2, double lambda, double y){
 
 	complex<double> complex_identity(0,1);
 
@@ -85,7 +85,8 @@ void Chiral_Orthogonal::Create_W(MatrixXcd* W_pointer, int ress, int N1, int N2,
 	// cout << "\nDifference of Symmetry equation: " << (W-Kronecker_Product(paulimatrix_y, I_ress)*W*Kronecker_Product(I_n, paulimatrix_y)).cwiseAbs() << endl;
 }
 
-void Chiral_Orthogonal::Create_ProjectionMatrices(MatrixXcd* C1_pointer, MatrixXcd* C2_pointer, int N1, int N2){
+
+void Chiral_Unitary::Create_ProjectionMatrices(MatrixXcd* C1_pointer, MatrixXcd* C2_pointer, int N1, int N2){
 
 	MatrixXcd C1tio(2,2);
 	MatrixXcd C2tio(2,2);
@@ -145,19 +146,27 @@ void Chiral_Orthogonal::Create_ProjectionMatrices(MatrixXcd* C1_pointer, MatrixX
 	*C2_pointer << C2;
 }
 
-void Chiral_Orthogonal::Create_H(MatrixXcd* H_pointer, int ress, double _lambda){
+void Chiral_Unitary::Create_H(MatrixXcd* H_pointer, int ress, double _lambda){
+
+	complex<double> complex_identity(0,1);
 
 	auto seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::normal_distribution<double> distribution(0.0, 1.0);
 	std::default_random_engine generator(seed);
 
 	MatrixXcd A(ress, ress);
+	MatrixXcd B(ress, ress);
 	MatrixXcd H1(ress, ress);
-	MatrixXcd Symmetric(ress, ress);
+	MatrixXcd H2(ress, ress);
+
+	MatrixXcd D(ress, ress);
 
 	A.setZero();
+	B.setZero();
 	H1.setZero();
-	Symmetric.setZero();
+	H2.setZero();
+
+	D.setZero();
 
 	for (int i = 1; i < ress + 1; i++){
 		for (int j = 1; j < ress + 1; j++){
@@ -167,25 +176,35 @@ void Chiral_Orthogonal::Create_H(MatrixXcd* H_pointer, int ress, double _lambda)
 	}
 
 	for (int i = 1; i < ress + 1; i++){
-		H1(i-1,i-1) = A(i-1,i-1)*((1/2)*_lambda*(1/sqrt(ress)));
-		for (int j = 1 + 1; j < ress + 1; j++){
-			H1(i-1,j-1) = A(i-1,j-1)*(_lambda*(1/sqrt(ress)));
+		for (int j = 1; j < ress + 1; j++){
+			double aux = distribution(generator);
+			B(i-1,j-1) = aux;
 		}
 	}
 
-	Symmetric << H1 + H1.transpose();
+	for (int i = 1; i < ress + 1; i++){
+		H1(i-1,i-1) = A(i-1,i-1)*(_lambda*(1/sqrt(ress)));
+		for (int j = 1 + 1; j < ress + 1; j++){
+			H1(i-1,j-1) = A(i-1,j-1)*(_lambda*(1/sqrt(2*ress)));
+			H1(j-1,i-1) = A(j-1,i-1)*(_lambda*(1/sqrt(2*ress)));
+		}
+	}
+
+	H2 << (_lambda*(1/sqrt(2*ress)))*B;
+
+	D << H1 + complex_identity * H2;
 
 	MatrixXcd H(_chiral_deg * _spin_deg * ress, _chiral_deg * _spin_deg * ress);
 
-	H.block(0, 0, ress, ress) =  MatrixXcd::Zero(ress, ress); H.block(0, ress, ress, ress) = Symmetric;
-	H.block(ress, 0, ress, ress) = Symmetric.adjoint(); H.block(ress, ress, ress, ress) = MatrixXcd::Zero(ress, ress);
+	H.block(0, 0, ress, ress) =  MatrixXcd::Zero(ress, ress); H.block(0, ress, ress, ress) = D;
+	H.block(ress, 0, ress, ress) = D.adjoint(); H.block(ress, ress, ress, ress) = MatrixXcd::Zero(ress, ress);
 
 	*H_pointer = H;
 }
 
-void Chiral_Orthogonal::Save_txt_files_Channels(MatrixXcd G, MatrixXcd P, int num_steps){
-	std::ofstream output_G("Data_Analysis/Channel/Dirac_G_O_Channel.txt");
-	std::ofstream output_P("Data_Analysis/Channel/Dirac_P_O_Channel.txt");
+void Chiral_Unitary::Save_txt_files_Channels(MatrixXcd G, MatrixXcd P, int num_steps){
+	std::ofstream output_G("Data_Analysis/Channel/Dirac_G_U_Channel.txt");
+	std::ofstream output_P("Data_Analysis/Channel/Dirac_P_U_Channel.txt");
 
 	for(int i = 0; i < num_steps; i++){
 		for (int j = 0; j < 10; j++){
