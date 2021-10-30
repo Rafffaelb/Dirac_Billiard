@@ -125,18 +125,11 @@ void Chiral_Orthogonal::Create_ProjectionMatrices(MatrixXcd* C1_pointer, MatrixX
 		}
 	}
 
-	for (int i = 1; i < 3; i++){
-		for (int j = 1; j < 3; j++){
-			C1_aux.block((i-1)*identity1.rows(), (j-1)*identity1.cols(), identity1.rows(), identity1.cols()) = C1tio(i-1,j-1)*identity1;
-			
-		}
-	}
+	C1_aux.block(0, 0, N1, N1) << identity1; C1_aux.block(0, N1, N1, N2) << MatrixXcd::Zero(N1, N2);
+	C1_aux.block(N1, 0, N2, N1) << MatrixXcd::Zero(N2, N1); C1_aux.block(N1, N1, N2, N2) << MatrixXcd::Zero(N2, N2);
 
-	for (int i = 1; i < 3; i++){
-		for (int j = 1; j < 3; j++){
-			C2_aux.block((i-1)*identity2.rows(), (j-1)*identity2.cols(), identity2.rows(), identity2.cols()) = C2tio(i-1,j-1)*identity2;
-		}
-	}
+	C2_aux.block(0, 0, N1, N1) << MatrixXcd::Zero(N1, N1); C1_aux.block(0, N1, N1, N2) << MatrixXcd::Zero(N1, N2);
+	C1_aux.block(N1, 0, N2, N1) << MatrixXcd::Zero(N2, N1); C1_aux.block(N1, N1, N2, N2) << identity2;
 
 	C1 << Kronecker_Product(C1_aux, MatrixXcd::Identity(2,2));
 	C2 << Kronecker_Product(C2_aux, MatrixXcd::Identity(2,2));
@@ -168,7 +161,7 @@ void Chiral_Orthogonal::Create_H(MatrixXcd* H_pointer, int ress, double _lambda)
 
 	for (int i = 1; i < ress + 1; i++){
 		H1(i-1,i-1) = A(i-1,i-1)*((1/2)*_lambda*(1/sqrt(ress)));
-		for (int j = 1 + 1; j < ress + 1; j++){
+		for (int j = i + 1; j < ress + 1; j++){
 			H1(i-1,j-1) = A(i-1,j-1)*(_lambda*(1/sqrt(ress)));
 		}
 	}
@@ -176,6 +169,7 @@ void Chiral_Orthogonal::Create_H(MatrixXcd* H_pointer, int ress, double _lambda)
 	Symmetric << H1 + H1.transpose();
 
 	MatrixXcd H(_chiral_deg * _spin_deg * ress, _chiral_deg * _spin_deg * ress);
+	H.setZero();
 
 	H.block(0, 0, ress, ress) =  MatrixXcd::Zero(ress, ress); H.block(0, ress, ress, ress) = Symmetric;
 	H.block(ress, 0, ress, ress) = Symmetric.adjoint(); H.block(ress, ress, ress, ress) = MatrixXcd::Zero(ress, ress);

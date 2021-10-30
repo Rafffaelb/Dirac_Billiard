@@ -215,7 +215,7 @@ void Chiral_Symplectic::Create_H(MatrixXcd* H_pointer, int ress, double _lambda)
 
 	for (int i = 1; i < ress + 1; i++){
 		H0(i-1,i-1) = A(i-1,i-1)*(_lambda*(1/sqrt(ress)));
-		for (int j = 1 + 1; j < ress + 1; j++){
+		for (int j = i + 1; j < ress + 1; j++){
 			H0(i-1,j-1) = A(i-1,j-1)*(_lambda*(1/sqrt(4*ress)));
 			H0(j-1,i-1) = A(j-1,i-1)*(_lambda*(1/sqrt(4*ress)));
 		}

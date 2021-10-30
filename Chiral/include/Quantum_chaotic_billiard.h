@@ -8,6 +8,9 @@ using namespace Eigen;
 class Quantum_chaotic_billiard
 {
 	private:
+		int _N1;
+		int _N2;
+		
 		complex<double> _G;
 		complex<double> _P;
 		double _Concurrence;
@@ -22,9 +25,9 @@ class Quantum_chaotic_billiard
 		MatrixXcd _S;
 	
 	public:
-		Quantum_chaotic_billiard(MatrixXcd H, MatrixXcd W, MatrixXcd C1, MatrixXcd C2);
+		Quantum_chaotic_billiard(MatrixXcd H, MatrixXcd W, MatrixXcd C1, MatrixXcd C2, int N1, int N2);
 
-		void Set_Setup(MatrixXcd H, MatrixXcd W, MatrixXcd C1, MatrixXcd C2);
+		void Set_Setup(MatrixXcd H, MatrixXcd W, MatrixXcd C1, MatrixXcd C2, int N1, int N2);
 
 		void Calculate_Smatrix();
 
