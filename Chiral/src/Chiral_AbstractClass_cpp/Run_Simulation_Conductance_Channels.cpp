@@ -16,7 +16,7 @@ void Chiral::Run_Simulation_Conductance_Channels(){
 	double Gamma, y, V;
        	int ress;
 
-	ress = 50;
+	ress = 100;
 
 	Gamma = 1;
 	y = sqrt(1.0/Gamma)*(1.0-sqrt(1.0-Gamma));
@@ -53,7 +53,7 @@ void Chiral::Run_Simulation_Conductance_Channels(){
 
 		Create_ProjectionMatrices(C1_pointer, C2_pointer, N1, N2);
 		
-		//#pragma omp parallel for shared(W, C1, C2)
+	//	#pragma omp parallel for shared(W, C1, C2)
 		for (int step = 1; step < _num_steps + 1; step++){
 			
 			// Generate Hamiltonian Matrix //

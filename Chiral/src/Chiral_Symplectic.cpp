@@ -62,7 +62,7 @@ void Chiral_Symplectic::Create_W(MatrixXcd* W_pointer, int ress, int N1, int N2,
 	W2_new << Implementing_Chiral_Symmetry_W(W2_aux, N2, ress, _chiral_deg);
 
 	// Uncomment the code below to verify the constraint Wp'*Wq = delta_pq //
-	//
+	
 	// cout << "\nW1_new'*W1_new: (It must be diagonal)\n" << W1_new.adjoint()*W1_new << endl;
 	// cout << "\nW2_new'*W2_new: (It must be diagonal)\n" << W2_new.adjoint()*W2_new << endl;
 	// cout << "\nW1_new'*W2_new: (It must be zero)\n" << W1_new.adjoint()*W2_new << endl;
@@ -80,72 +80,39 @@ void Chiral_Symplectic::Create_W(MatrixXcd* W_pointer, int ress, int N1, int N2,
 	// MatrixXcd I_spin = MatrixXcd::Identity(2, 2);
 	// MatrixXcd I_ress = MatrixXcd::Identity(ress, ress);
 	// MatrixXcd I_n = MatrixXcd::Identity((N1+N2), (N1+N2));
-	// MatrixXcd paulimatrix_y(2,2);
+	// MatrixXcd paulimatrix_z(2,2), paulimatrix_y(2,2);
        
-	// paulimatrix_y << 0, complex_identity,
-	//	 	 -complex_identity, 0;
-	 
-	// cout << "\nDifference of Symmetry equation: " << (W-Kronecker_Product(Kronecker_Product(paulimatrix_y, I_ress), I_spin)*W*Kronecker_Product(Kronecker_Product(I_n, paulimatrix_y), I_spin)).cwiseAbs() << endl;
+	// paulimatrix_z << 1, 0,
+	//   	 	 0, -1;
+	
+	// paulimatrix_y << 0, -complex_identity,
+	//  		 complex_identity, 0; 
+
+	// cout << "\nThe W constraint: \n" << (W-Kronecker_Product(Kronecker_Product(paulimatrix_z, I_ress), paulimatrix_y)*W*Kronecker_Product(Kronecker_Product(I_n, paulimatrix_z), paulimatrix_y)).cwiseAbs() << endl;
 }
 
 void Chiral_Symplectic::Create_ProjectionMatrices(MatrixXcd* C1_pointer, MatrixXcd* C2_pointer, int N1, int N2){
 
-	MatrixXcd C1tio(2,2);
-	MatrixXcd C2tio(2,2);
-
 	MatrixXcd identity1 = MatrixXcd::Identity(N1,N1);
 	MatrixXcd identity2 = MatrixXcd::Identity(N2,N2);
 	
-	MatrixXcd C1_aux(2*N1, 2*N1);
-	MatrixXcd C2_aux(2*N2, 2*N2);
+	MatrixXcd C1_aux((N1+N2), (N1+N2));
+	MatrixXcd C2_aux((N1+N2), (N1+N2));
 
-	MatrixXcd C1_without_spin(_chiral_deg * 2*N1, _chiral_deg * 2*N1);
-	MatrixXcd C2_without_spin(_chiral_deg * 2*N2, _chiral_deg * 2*N2);
+	C1_aux.block(0, 0, N1, N1) << identity1; C1_aux.block(0, N1, N1, N2) << MatrixXcd::Zero(N1, N2);
+	C1_aux.block(N1, 0, N2, N1) << MatrixXcd::Zero(N2, N1); C1_aux.block(N1, N1, N2, N2) << MatrixXcd::Zero(N2, N2);
 
-	for (int i=1; i < 3; i++){
-		for (int j=1; j < 3; j++){
-			if (i == 1 && j == 1){
-				std::complex<double> aux(1,0);
-				C1tio(i-1,j-1) = aux;
-			}
-			else{
-				std::complex<double> aux(0,0);
-				C1tio(i-1,j-1) = aux;
-			}
-		}
-	}
+	C2_aux.block(0, 0, N1, N1) << MatrixXcd::Zero(N1, N1); C2_aux.block(0, N1, N1, N2) << MatrixXcd::Zero(N1, N2);
+	C2_aux.block(N1, 0, N2, N1) << MatrixXcd::Zero(N2, N1); C2_aux.block(N1, N1, N2, N2) << identity2;
 
-	for (int i=1; i < 3; i++){
-		for (int j=1; j < 3; j++){
-			if (i == 2 && j == 2){
-				std::complex<double> aux(1,0);
-				C2tio(i-1,j-1) = aux;
-			}
-			else{
-				std::complex<double> aux(0,0);
-				C2tio(i-1,j-1) = aux;
-			}
-		}
-	}
+	MatrixXcd C1_without_spin(_chiral_deg * (N1+N2), _chiral_deg * (N1+N2));
+	MatrixXcd C2_without_spin(_chiral_deg * (N1+N2), _chiral_deg * (N1+N2));
 
-	for (int i = 1; i < 3; i++){
-		for (int j = 1; j < 3; j++){
-			C1_aux.block((i-1)*identity1.rows(), (j-1)*identity1.cols(), identity1.rows(), identity1.cols()) = C1tio(i-1,j-1)*identity1;
-			
-		}
-	}
+	C1_without_spin << Kronecker_Product(C1_aux, MatrixXcd::Identity(_chiral_deg, _chiral_deg));
+	C2_without_spin << Kronecker_Product(C2_aux, MatrixXcd::Identity(_chiral_deg, _chiral_deg));
 
-	for (int i = 1; i < 3; i++){
-		for (int j = 1; j < 3; j++){
-			C2_aux.block((i-1)*identity2.rows(), (j-1)*identity2.cols(), identity2.rows(), identity2.cols()) = C2tio(i-1,j-1)*identity2;
-		}
-	}
-
-	C1_without_spin << Kronecker_Product(C1_aux, MatrixXcd::Identity(2,2));
-	C2_without_spin << Kronecker_Product(C2_aux, MatrixXcd::Identity(2,2));
-
-	MatrixXcd C1(_spin_deg * _chiral_deg * 2*N1, _spin_deg * _chiral_deg * 2*N1);
-	MatrixXcd C2(_spin_deg * _chiral_deg * 2*N2, _spin_deg * _chiral_deg * 2*N2);
+	MatrixXcd C1(_chiral_deg * _spin_deg * (N1+N2), _chiral_deg * _spin_deg * (N1+N2));
+	MatrixXcd C2(_chiral_deg * _spin_deg * (N1+N2), _chiral_deg * _spin_deg * (N1+N2));
 
 	C1 << Kronecker_Product(C1_without_spin, MatrixXcd::Identity(_spin_deg, _spin_deg));
 	C2 << Kronecker_Product(C2_without_spin, MatrixXcd::Identity(_spin_deg, _spin_deg));
@@ -197,7 +164,7 @@ void Chiral_Symplectic::Create_H(MatrixXcd* H_pointer, int ress, double _lambda)
 	H2.setZero();
 	H3.setZero();
 
-	D.setZero();
+	Ham.setZero();
 
 	for (int i = 1; i < ress + 1; i++){
 		for (int j = 1; j < ress + 1; j++){
@@ -210,6 +177,20 @@ void Chiral_Symplectic::Create_H(MatrixXcd* H_pointer, int ress, double _lambda)
 		for (int j = 1; j < ress + 1; j++){
 			double aux = distribution(generator);
 			B(i-1,j-1) = aux;
+		}
+	}
+	
+	for (int i = 1; i < ress + 1; i++){
+		for (int j = 1; j < ress + 1; j++){
+			double aux = distribution(generator);
+			C(i-1,j-1) = aux;
+		}
+	}
+
+	for (int i = 1; i < ress + 1; i++){
+		for (int j = 1; j < ress + 1; j++){
+			double aux = distribution(generator);
+			D(i-1,j-1) = aux;
 		}
 	}
 
@@ -225,13 +206,18 @@ void Chiral_Symplectic::Create_H(MatrixXcd* H_pointer, int ress, double _lambda)
 	H2 << (_lambda*(1/sqrt(4*ress)))*C;
 	H3 << (_lambda*(1/sqrt(4*ress)))*D;
 
-	Ham << Kronecker_Product(H0, MatrixXcd::Identity(2,2)) + Kronecker_Product(H1, paulimatrix_x) + Kronecker_Product(H2, paulimatrix_y) + Kronecker_Product(H3, paulimatrix_z);
+	Ham << Kronecker_Product(H0, MatrixXcd::Identity(2,2)) + complex_identity*(Kronecker_Product(H1, paulimatrix_x) + Kronecker_Product(H2, paulimatrix_y) + Kronecker_Product(H3, paulimatrix_z));
 
 	MatrixXcd H(_chiral_deg * _spin_deg * ress, _chiral_deg * _spin_deg * ress);
 
 	H.block(0, 0, _spin_deg * ress, _spin_deg * ress) =  MatrixXcd::Zero(_spin_deg * ress, _spin_deg * ress); H.block(0, _spin_deg * ress, _spin_deg * ress, _spin_deg * ress) = Ham;
 	H.block(_spin_deg * ress, 0, _spin_deg * ress, _spin_deg * ress) = Ham.adjoint(); H.block(_spin_deg * ress, _spin_deg * ress, _spin_deg * ress, _spin_deg * ress) = MatrixXcd::Zero(_spin_deg * ress, _spin_deg * ress);
 
+	// Uncomment the code below to verify the Chiral Symmetry Constraint of Hamiltonian //
+
+	// cout << "\nThe Hamiltonian Constraint: \n" << (H -(-Kronecker_Product(Kronecker_Product(paulimatrix_z, MatrixXcd::Identity(ress, ress)), MatrixXcd::Identity(_spin_deg, _spin_deg))*H*Kronecker_Product(Kronecker_Product(paulimatrix_z, MatrixXcd::Identity(ress, ress)), MatrixXcd::Identity(_spin_deg, _spin_deg)))) << endl;
+
+	*H_pointer << H;
 }
 
 void Chiral_Symplectic::Save_txt_files_Channels(MatrixXcd G, MatrixXcd P, int num_steps){

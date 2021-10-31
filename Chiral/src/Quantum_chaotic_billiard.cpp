@@ -29,11 +29,6 @@ void Quantum_chaotic_billiard::Set_Setup(MatrixXcd H, MatrixXcd W, MatrixXcd C1,
 
 void Quantum_chaotic_billiard::Calculate_Smatrix(){
 
-	MatrixXcd paulimatrix_z(2,2);
-
-	paulimatrix_z << 1, 0,
-		      	 0, -1;
-
 	complex<double> number_2(2,0);
 	complex<double> complex_identity(0,1);
 
@@ -56,11 +51,20 @@ void Quantum_chaotic_billiard::Calculate_Smatrix(){
 
 	S << identityS - number_2*complex_identity*M_PI*(_W.adjoint())*D_inv_W;
 
-	cout << "\nThe Difference Equation of Symmetry: \n" << (S-Kronecker_Product(MatrixXcd::Identity(n,n), paulimatrix_z)*S.adjoint()*Kronecker_Product(MatrixXcd::Identity(n,n), paulimatrix_z)).cwiseAbs() << endl;
+	// Uncomment the code below to verify the Symmetry constraint of the Scattering Matrix // 	
+
+	// MatrixXcd paulimatrix_z(2,2);
+
+	// paulimatrix_z << 1, 0,
+	//	      	 0, -1;
+	
+	// cout << "\nThe Symmetry Constraint of the S Matrix: \n" << (S-Kronecker_Product(MatrixXcd::Identity(n,n), paulimatrix_z)*S.adjoint()*Kronecker_Product(MatrixXcd::Identity(n,n), MatrixXcd::Identity(2, 2))).cwiseAbs() << endl;
+
+	// Uncomment the code below to verify the Symmetry constraint of the Scattering Matrix for Symplectic Ensemble //
+
+	// cout << "\nThe Symmetry Constraint of the S Matrix: \n" << (S-Kronecker_Product(Kronecker_Product(MatrixXcd::Identity(n,n), paulimatrix_z), MatrixXcd::Identity(2, 2))*S.adjoint()*Kronecker_Product(Kronecker_Product(MatrixXcd::Identity(n,n), paulimatrix_z),MatrixXcd::Identity(2, 2))).cwiseAbs() << endl;
 
 	this -> _S = S;
-
-	
 }
 
 void Quantum_chaotic_billiard::Calculate_G_and_P(){

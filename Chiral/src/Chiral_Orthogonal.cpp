@@ -77,59 +77,30 @@ void Chiral_Orthogonal::Create_W(MatrixXcd* W_pointer, int ress, int N1, int N2,
 	// MatrixXcd I_spin = MatrixXcd::Identity(2, 2);
 	// MatrixXcd I_ress = MatrixXcd::Identity(ress, ress);
 	// MatrixXcd I_n = MatrixXcd::Identity((N1+N2), (N1+N2));
-	// MatrixXcd paulimatrix_y(2,2);
+	// MatrixXcd paulimatrix_z(2,2);
        
-	// paulimatrix_y << 0, complex_identity,
-	//	 	 -complex_identity, 0;
+	// paulimatrix_z << 1, 0,
+	//  	 	 0, -1;
 	 
-	// cout << "\nDifference of Symmetry equation: " << (W-Kronecker_Product(paulimatrix_y, I_ress)*W*Kronecker_Product(I_n, paulimatrix_y)).cwiseAbs() << endl;
+	// cout << "\nThe W constraint: " << (W-Kronecker_Product(paulimatrix_z, I_ress)*W*Kronecker_Product(I_n, paulimatrix_z)).cwiseAbs() << endl;
 }
 
 void Chiral_Orthogonal::Create_ProjectionMatrices(MatrixXcd* C1_pointer, MatrixXcd* C2_pointer, int N1, int N2){
 
-	MatrixXcd C1tio(2,2);
-	MatrixXcd C2tio(2,2);
-
 	MatrixXcd identity1 = MatrixXcd::Identity(N1,N1);
 	MatrixXcd identity2 = MatrixXcd::Identity(N2,N2);
 	
-	MatrixXcd C1_aux(2*N1, 2*N1);
-	MatrixXcd C2_aux(2*N2, 2*N2);
-
-	MatrixXcd C1(_chiral_deg * 2*N1, _chiral_deg * 2*N1);
-	MatrixXcd C2(_chiral_deg * 2*N2, _chiral_deg * 2*N2);
-
-	for (int i=1; i < 3; i++){
-		for (int j=1; j < 3; j++){
-			if (i == 1 && j == 1){
-				std::complex<double> aux(1,0);
-				C1tio(i-1,j-1) = aux;
-			}
-			else{
-				std::complex<double> aux(0,0);
-				C1tio(i-1,j-1) = aux;
-			}
-		}
-	}
-
-	for (int i=1; i < 3; i++){
-		for (int j=1; j < 3; j++){
-			if (i == 2 && j == 2){
-				std::complex<double> aux(1,0);
-				C2tio(i-1,j-1) = aux;
-			}
-			else{
-				std::complex<double> aux(0,0);
-				C2tio(i-1,j-1) = aux;
-			}
-		}
-	}
+	MatrixXcd C1_aux((N1+N2), (N1+N2));
+	MatrixXcd C2_aux((N1+N2), (N1+N2));
 
 	C1_aux.block(0, 0, N1, N1) << identity1; C1_aux.block(0, N1, N1, N2) << MatrixXcd::Zero(N1, N2);
 	C1_aux.block(N1, 0, N2, N1) << MatrixXcd::Zero(N2, N1); C1_aux.block(N1, N1, N2, N2) << MatrixXcd::Zero(N2, N2);
 
-	C2_aux.block(0, 0, N1, N1) << MatrixXcd::Zero(N1, N1); C1_aux.block(0, N1, N1, N2) << MatrixXcd::Zero(N1, N2);
-	C1_aux.block(N1, 0, N2, N1) << MatrixXcd::Zero(N2, N1); C1_aux.block(N1, N1, N2, N2) << identity2;
+	C2_aux.block(0, 0, N1, N1) << MatrixXcd::Zero(N1, N1); C2_aux.block(0, N1, N1, N2) << MatrixXcd::Zero(N1, N2);
+	C2_aux.block(N1, 0, N2, N1) << MatrixXcd::Zero(N2, N1); C2_aux.block(N1, N1, N2, N2) << identity2;
+
+	MatrixXcd C1(_chiral_deg * (N1+N2), _chiral_deg * (N1+N2));
+	MatrixXcd C2(_chiral_deg * (N1+N2), _chiral_deg * (N1+N2));
 
 	C1 << Kronecker_Product(C1_aux, MatrixXcd::Identity(2,2));
 	C2 << Kronecker_Product(C2_aux, MatrixXcd::Identity(2,2));
@@ -150,7 +121,6 @@ void Chiral_Orthogonal::Create_H(MatrixXcd* H_pointer, int ress, double _lambda)
 
 	A.setZero();
 	H1.setZero();
-	Symmetric.setZero();
 
 	for (int i = 1; i < ress + 1; i++){
 		for (int j = 1; j < ress + 1; j++){
@@ -160,19 +130,30 @@ void Chiral_Orthogonal::Create_H(MatrixXcd* H_pointer, int ress, double _lambda)
 	}
 
 	for (int i = 1; i < ress + 1; i++){
-		H1(i-1,i-1) = A(i-1,i-1)*((1/2)*_lambda*(1/sqrt(ress)));
+		H1(i-1,i-1) = A(i-1,i-1)*(_lambda*(1/sqrt(ress)));
 		for (int j = i + 1; j < ress + 1; j++){
-			H1(i-1,j-1) = A(i-1,j-1)*(_lambda*(1/sqrt(ress)));
+			H1(i-1,j-1) = A(i-1,j-1)*(_lambda*(1/sqrt(2*ress)));
+			H1(j-1,i-1) = A(j-1,i-1)*(_lambda*(1/sqrt(2*ress)));
 		}
 	}
 
-	Symmetric << H1 + H1.transpose();
+	MatrixXcd Ham(ress, ress);
+       	Ham << H1;
 
 	MatrixXcd H(_chiral_deg * _spin_deg * ress, _chiral_deg * _spin_deg * ress);
 	H.setZero();
 
-	H.block(0, 0, ress, ress) =  MatrixXcd::Zero(ress, ress); H.block(0, ress, ress, ress) = Symmetric;
-	H.block(ress, 0, ress, ress) = Symmetric.adjoint(); H.block(ress, ress, ress, ress) = MatrixXcd::Zero(ress, ress);
+	H.block(0, 0, ress, ress) =  MatrixXcd::Zero(ress, ress); H.block(0, ress, ress, ress) = Ham;
+	H.block(ress, 0, ress, ress) = Ham.adjoint(); H.block(ress, ress, ress, ress) = MatrixXcd::Zero(ress, ress);
+
+	// Uncomment the code below to verify the Chiral Symmetry Constraint of Hamiltonian //
+
+	// MatrixXcd paulimatrix_z(2,2);
+       
+	// paulimatrix_z << 1, 0,
+	//		 0, -1;
+
+	// cout << "\nThe Hamiltonian Constraint: \n" << (H -(-Kronecker_Product(paulimatrix_z, MatrixXcd::Identity(ress, ress))*H*Kronecker_Product(paulimatrix_z, MatrixXcd::Identity(ress, ress)))) << endl;
 
 	*H_pointer = H;
 }
