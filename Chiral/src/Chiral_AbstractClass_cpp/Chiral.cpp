@@ -19,3 +19,5 @@ void Chiral::Create_ProjectionMatrices(MatrixXcd* C1_pointer, MatrixXcd* C2_poin
 void Chiral::Create_H(MatrixXcd* H_pointer, int _ress, double _lambda) {};
 
 void Chiral::Save_txt_files_Channels(MatrixXcd G, MatrixXcd P, int num_steps) {};
+
+void Chiral::Save_txt_files_Gamma(MatrixXcd G, MatrixXcd P, int num_steps, int N1) {};

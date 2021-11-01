@@ -33,6 +33,14 @@ int main(int argc, char **argv){
 				
 					chiral_orthogonal.Run_Simulation_Conductance_Channels();
 				}
+
+				if (strcmp(argv[j],"Gamma") == 0){
+
+					cout << "\n ##### Running Chiral Orthogonal (variable: Gamma) ##### \n" << endl;
+
+					chiral_orthogonal.Run_Simulation_Conductance_Gamma();
+				}
+
 			}
 			chiral_orthogonal.~Chiral_Orthogonal();
 		}
@@ -51,6 +59,14 @@ int main(int argc, char **argv){
 
 						chiral_unitary.Run_Simulation_Conductance_Channels();
 					}
+
+					if (strcmp(argv[j],"Gamma") == 0){
+
+						cout << "\n ###### Running Chiral Unitary (variable: Gamma) ##### \n" << endl;
+
+						chiral_unitary.Run_Simulation_Conductance_Gamma();
+					}
+
 				}
 				chiral_unitary.~Chiral_Unitary();
 			}
@@ -69,6 +85,13 @@ int main(int argc, char **argv){
 
 							chiral_symplectic.Run_Simulation_Conductance_Channels();
 						}
+
+						if (strcmp(argv[j],"Gamma") == 0){
+				
+							cout << "\n ###### Running Chiral Symplectic (variable: Gamma) ####### \n" << endl;
+							chiral_symplectic.Run_Simulation_Conductance_Gamma();
+						}
+
 					}
 					chiral_symplectic.~Chiral_Symplectic();
 				}
