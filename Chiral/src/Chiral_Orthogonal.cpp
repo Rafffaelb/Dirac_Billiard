@@ -195,3 +195,22 @@ void Chiral_Orthogonal::Save_txt_files_Gamma(MatrixXcd G, MatrixXcd P, int num_s
 	}	
 }
 
+void Chiral_Orthogonal::Save_txt_files_Concurrence_Gamma(MatrixXd Concurrence, MatrixXd Entanglement, int num_steps){
+
+	std::ofstream output_Concurrence("Data_Analysis/Concurrence/Dirac_Concurrence_O_Gamma.txt");
+	std::ofstream output_Entanglement("Data_Analysis/Concurrence/Dirac_Entanglement_O_Gamma.txt");
+
+	for(int i = 0; i < num_steps; i++){
+		for (int j = 0; j < 21; j++){
+			if (j == 20){
+				output_Concurrence << Concurrence(i,j) << std::endl;
+				output_Entanglement << Entanglement(i,j) << std::endl;
+			}
+			else{
+				output_Concurrence << Concurrence(i,j) << "\t";
+				output_Entanglement << Entanglement(i,j) << "\t";
+			}
+		}
+	}	
+}
+

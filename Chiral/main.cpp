@@ -15,7 +15,7 @@ int main(int argc, char **argv){
 
 	lambda = 0.5;
 	chiral_deg = 2;
-	num_steps = 100000;
+	num_steps = 1000000;
 
 	for (int i = 1; i < argc; i++){
 		
@@ -39,6 +39,13 @@ int main(int argc, char **argv){
 					cout << "\n ##### Running Chiral Orthogonal (variable: Gamma) ##### \n" << endl;
 
 					chiral_orthogonal.Run_Simulation_Conductance_Gamma();
+				}
+
+				if (strcmp(argv[j],"Concurrence") == 0){
+
+					cout << "\n ###### Running Orthogonal Concurrence (variable: Gamma) ###### \n" << endl;
+				
+					chiral_orthogonal.Run_Simulation_Concurrence_Gamma();
 				}
 
 			}
@@ -65,6 +72,13 @@ int main(int argc, char **argv){
 						cout << "\n ###### Running Chiral Unitary (variable: Gamma) ##### \n" << endl;
 
 						chiral_unitary.Run_Simulation_Conductance_Gamma();
+					}
+					
+					if (strcmp(argv[j],"Concurrence") == 0){
+
+						cout << "\n ###### Running Unitary Concurrence (variable: Gamma) ###### \n" << endl;
+
+						chiral_unitary.Run_Simulation_Concurrence_Gamma();
 					}
 
 				}
