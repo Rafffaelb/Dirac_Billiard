@@ -48,6 +48,14 @@ int main(int argc, char **argv){
 					chiral_orthogonal.Run_Simulation_Concurrence_Gamma();
 				}
 
+				if (strcmp(argv[j],"Bell_Parameter_Ress") == 0){
+					
+					cout << "\n ###### Running Orthogonal Bell Parameter (variable: Ress) ##### \n" << endl;
+				
+					chiral_orthogonal.Run_Simulation_Bell_Parameter_Ress();
+				}
+
+
 			}
 			chiral_orthogonal.~Chiral_Orthogonal();
 		}
@@ -79,6 +87,13 @@ int main(int argc, char **argv){
 						cout << "\n ###### Running Unitary Concurrence (variable: Gamma) ###### \n" << endl;
 
 						chiral_unitary.Run_Simulation_Concurrence_Gamma();
+					}
+
+					if (strcmp(argv[j],"Bell_Parameter_Ress") == 0){
+					
+						cout << "\n ###### Running Unitary Bell Parameter (variable: Ress) ##### \n" << endl;
+					
+						chiral_unitary.Run_Simulation_Bell_Parameter_Ress();
 					}
 
 				}
