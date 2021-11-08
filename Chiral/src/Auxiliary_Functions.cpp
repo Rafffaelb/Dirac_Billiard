@@ -57,3 +57,8 @@ MatrixXcd Implementing_Chiral_Symmetry_W(MatrixXcd W_aux, int N, int ress, int _
 	
 	return W_new;
 }
+
+MatrixXcd product_vector_matrix(Vector3d vector, MatrixXcd paulimatrix_x, MatrixXcd paulimatrix_y, MatrixXcd paulimatrix_z){
+
+	return vector[0]*paulimatrix_x + vector[1]*paulimatrix_y + vector[2]*paulimatrix_z;
+}

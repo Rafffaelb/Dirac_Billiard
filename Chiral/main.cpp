@@ -62,6 +62,13 @@ int main(int argc, char **argv){
 					chiral_orthogonal.Run_Simulation_Bell_Parameter_Gamma();
 				}
 
+				if (strcmp(argv[j],"Bell_Parameter_Fixed_Base") == 0){
+				
+					cout << "\n ###### Running Orthogonal Bell Parameter Fixed Base ##### \n" << endl;
+
+					chiral_orthogonal.Run_Simulation_Bell_Parameter_Fixed_Base();
+				}
+
 			}
 			chiral_orthogonal.~Chiral_Orthogonal();
 		}
@@ -107,6 +114,13 @@ int main(int argc, char **argv){
 						cout << "\n ##### Running Unitary Bell Parameter (variable: Gamma) ##### \n" << endl;
 
 						chiral_unitary.Run_Simulation_Bell_Parameter_Gamma();
+					}
+
+					if (strcmp(argv[j],"Bell_Parameter_Fixed_Base") == 0){
+
+						cout << "\n ##### Running Unitary Bell Parameter Fixed Base ##### \n" << endl;
+
+						chiral_unitary.Run_Simulation_Bell_Parameter_Fixed_Base();
 					}
 
 				}
