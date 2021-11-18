@@ -147,7 +147,7 @@ void Chiral_Unitary::Create_H(MatrixXcd* H_pointer, int ress, double _lambda){
 	}
 
 	for (int i = 1; i < ress + 1; i++){
-		H1(i-1,i-1) = A(i-1,i-1)*(_lambda*(1/sqrt(ress)));
+		H1(i-1,i-1) = A(i-1,i-1)*(_lambda*(1/sqrt(2*ress)));
 		for (int j = i + 1; j < ress + 1; j++){
 			H1(i-1,j-1) = A(i-1,j-1)*(_lambda*(1/sqrt(2*ress)));
 			H1(j-1,i-1) = A(j-1,i-1)*(_lambda*(1/sqrt(2*ress)));
