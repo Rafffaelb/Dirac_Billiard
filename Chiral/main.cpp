@@ -15,7 +15,7 @@ int main(int argc, char **argv){
 
 	lambda = 0.5;
 	chiral_deg = 2;
-	num_steps = 100000;
+	num_steps = 1000000;
 
 	for (int i = 1; i < argc; i++){
 		
