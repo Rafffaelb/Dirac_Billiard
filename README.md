@@ -1,6 +1,6 @@
 # Dirac's Billiard
 
-Hello! My name is Rafael and in this repository I perform numerical simulations to calculate properties of electrical transport in Dirac's billiard such as conductance, power shot noise, concurrence, the entanglement of formation, and violations of Bell's inequality. All of the results of this repository can be found in the jupyter notebook's files of the directory "/Chiral/Data_Analysis". Dirac's billiard is a type of quantum billiard used to describe a system with chiral/sub-lattice symmetry. Systems with chiral symmetry can be found in single-layer graphene quantum billiard, illustrated in the Figure 1 from the thesis [[1]](#1) that produces the reference [[2]](#2).
+Hello! My name is Rafael and in this repository I perform numerical simulations to calculate properties of electrical transport in Dirac's billiard such as conductance, power shot noise, concurrence, the entanglement of formation, and violations of Bell's inequality. All of the results of this repository can be found in the jupyter notebook's files of the directory "/Chiral/Data_Analysis". Dirac's billiard is a type of quantum billiard used to describe a system with chiral/sub-lattice symmetry. Systems with chiral symmetry can be found in some categories of topological insulators and in single-layer graphene quantum billiard, illustrated in the Figure 1 from the thesis [[1]](#1) that produces the reference [[2]](#2).
 
 <p align="center" width="100%">
   Figure 1<br>
