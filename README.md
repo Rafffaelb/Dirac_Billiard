@@ -17,7 +17,7 @@ As the Schrödinger billiard, the conductance in a Dirac billliard also depends 
 
 <p align="center" width="100%">
   Figure 2<br>
-    <img width="60%" src="https://user-images.githubusercontent.com/53999015/148553590-d035c8b8-0958-460c-9ecc-3cc8ccfa44aa.png">
+    <img width="60%" src="https://user-images.githubusercontent.com/53999015/148553888-1240bffa-9381-4286-a088-9cc90bc7f55c.png">
 </p>
 
 As we can see in Figure 2, the distribution of realizations of conductance depends on the β which indicates a specific symmetry of the hamiltonian. These symmetries are fundamentals to describe the physics of quantum billiards. In a Dirac billiard, there are three fundamental symmetries which are listed below:
