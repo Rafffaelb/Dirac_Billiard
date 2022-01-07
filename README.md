@@ -23,7 +23,7 @@ As the Schrödinger billiard, the conductance in a Dirac billliard also depends 
 As we can see in Figure 2, the distribution of realizations of conductance depends on the β which indicates a specific symmetry of the hamiltonian. These symmetries are fundamentals to describe the physics of quantum billiards. In a Dirac billiard, there are three fundamental symmetries which are listed below:
 
 #### Chiral Gaussian Orthogonal Ensemble (chGOE)
-The index β = 1 (blue), also indicated in the literature by "BDI", represents a system that has time-reversal symmetry (TRS) and spin rotational symmetry (SRS). The Hamiltonian of this system has to be a real-symmetric matrix.
+The index β = 1 (blue), also indicated in the literature by "BDI", represents a system that has time-reversal symmetry (TRS) and spin rotational symmetry (SRS). The Hamiltonian of this system has to be a real matrix.
 #### Chiral Gaussian Unitary Ensemble (chGUE)
 The β = 2 (red), also indicated by literature as "AIII", represents a system that the TRS is broken. This happens when there is a magnetic field applied in the quantum dot, the magnetic field breaks the time-reversal symmetry. When the TRS is broken, it doesn't matter if SRS is preserved or broken. In this case, each element of the Hamiltonian is a complex number.
 #### Chiral Gaussian Symplectic Ensemble (chGSE)
