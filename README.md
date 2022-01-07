@@ -13,7 +13,14 @@ The difference between Schrödinger and Dirac billiards remains mainly in the el
 
 **In this repository**, I analyze the influence of the three fundamental symmetries (chGOE, chGUE, chGSE) in the conductance of electrons inside the Dirac billiard. I obtain the distributions of conductance, as well as the average and variance in terms of the number of open channels for each class of symmetry. I also perform simulations to see how the conductance of each class of symmetry depends on the barrier between the lead and chaotic cavity, which Γ is called the transparency of the barrier. Moreover, I analyze the weak localization correction of conductance as a function of the barrier's transparency Γ and compare with the Schrodinger billiard.
 
-As the Schrödinger billiard, the conductance in a Dirac billliard also depends on the number of open channels in each lead, the potential barrier between the lead and the chaotic resonance cavity and especially the class of symmetry of the hamiltonian. Each open channels has two subchannels due to the chirality of the system. In graphene material, this subchannels can be viewed as the two sublattices in the honeycomb lattice. As we can see in Figure X, the distribution of realizations of conductance depends on the β which indicates a specific symmetry of the hamiltonian. These symmetries are fundamentals to describe the physics of quantum billiards. In a Dirac billiard, there are three fundamental symmetries which are listed below:
+As the Schrödinger billiard, the conductance in a Dirac billliard also depends on the number of open channels in each lead, the potential barrier between the lead and the chaotic resonance cavity and especially the class of symmetry of the hamiltonian. Each open channels has two subchannels due to the chirality of the system. In graphene material, this subchannels can be viewed as the two sublattices in the honeycomb lattice.
+
+<p align="center" width="100%">
+  Figure 2<br>
+    <img width="60%" src="https://user-images.githubusercontent.com/53999015/148553590-d035c8b8-0958-460c-9ecc-3cc8ccfa44aa.png">
+</p>
+
+As we can see in Figure 2, the distribution of realizations of conductance depends on the β which indicates a specific symmetry of the hamiltonian. These symmetries are fundamentals to describe the physics of quantum billiards. In a Dirac billiard, there are three fundamental symmetries which are listed below:
 
 #### Chiral Gaussian Orthogonal Ensemble (chGOE)
 The index β = 1 (blue), also indicated in the literature by "BDI", represents a system that has time-reversal symmetry (TRS) and spin rotational symmetry (SRS). The Hamiltonian of this system has to be a real-symmetric matrix.
