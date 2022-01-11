@@ -37,7 +37,7 @@ The β = 4 (green), indicated by literature as "CII", represents a system that S
 
 **In this repository**, I analyze the influence of the time-reversal symmetry in the concurrence and entanglement of formation for the Dirac billiard. So I study the concurrence and entanglement of formation produced in the chiral/sub-lattice degree of freedom and compare this production of entangled states when the time-reversal symmetry is broken or preserved. I also obtain the distributions of concurrence and entanglement of formation, as well as the average and variance in terms of the barrier's transparency Γ, recovering numerical and analytical results from the literature [[3]](#3). Comparing Schrödinger and Dirac repositories, the Dirac billiard produces more entanglement pairs than Schrödinger one.
 
-The concurrence is a property that quantifies the degree of entanglement of a system [[4]](#4) and can be viewed as how much a state of the system can be separated in two states from different subsystems. 
+The concurrence is a property that quantifies the degree of entanglement of a system [[4]](#4) and can be viewed as how much a state of the system can be separated in two states from different subsystems. In this repository we set the number of open channels in each lead as N = 1, the main goal is to study the production of entanglement in chiral/sub-lattice degrees of freedom. 
 
 ## References
 
