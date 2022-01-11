@@ -35,8 +35,9 @@ The β = 4 (green), indicated by literature as "CII", represents a system that S
 
 ## Concurrence
 
-**In this repository**, I analyze the influence of the time-reversal symmetry in the concurrence and entanglement of formation for the Dirac billiard. So I study the concurrence and entanglement of formation produced in the chiral/sub-lattice degree of freedom and compare this production of entangled states when the time-reversal symmetry is broken or preserved. I also obtain the distributions of concurrence and entanglement of formation, as well as the average and variance in terms of the barrier's transparency Γ. Comparing Schrödinger and Dirac repositories, the Dirac billiard produces more entanglement pairs than Schrödinger one.
+**In this repository**, I analyze the influence of the time-reversal symmetry in the concurrence and entanglement of formation for the Dirac billiard. So I study the concurrence and entanglement of formation produced in the chiral/sub-lattice degree of freedom and compare this production of entangled states when the time-reversal symmetry is broken or preserved. I also obtain the distributions of concurrence and entanglement of formation, as well as the average and variance in terms of the barrier's transparency Γ, recovering numerical and analytical results from the literature [[3]](#3). Comparing Schrödinger and Dirac repositories, the Dirac billiard produces more entanglement pairs than Schrödinger one.
 
+The concurrence is a property that quantifies the degree of entanglement of a system [[4]](#4) and can be viewed as how much a state of the system can be separated in two states from different subsystems. 
 
 ## References
 
@@ -45,3 +46,11 @@ Barros, M. S. M. (2018). Teoria do ruído e fenômenos de interferência quânti
 
 <a id="2">[2]</a>
 Barros, M. S. M., Júnior, A. J. N., Macedo-Junior, A. F., Ramos, J. G. G. S., & Barbosa, A. L. R. (2013). Open chaotic Dirac billiards: Weak (anti)localization, conductance fluctuations, and decoherence. Physical Review B, 88(24). doi:10.1103/physrevb.88.245133.
+
+<a id="3">[3]</a>
+Anomalous entanglement in chaotic Dirac billiards
+J. G. G. S. Ramos, I. M. L. da Silva, and A. L. R. Barbosa
+Phys. Rev. B 90, 245107 – Published 1 December 2014
+
+<a id="4">[4]</a>
+W. K. Wootters, Entanglement of formation of an arbitrary state of two qubits, Physical Review Letters 80, 2245 (1998).
