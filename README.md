@@ -7,13 +7,13 @@ Hello! My name is Rafael and in this repository I perform numerical simulations 
     <img width="40%" src="https://user-images.githubusercontent.com/53999015/147810879-3242820a-749b-4b06-9f81-92ba5c8cebe9.png">
 </p>
 
-The difference between Schrödinger and Dirac billiards remains mainly in the electron behavior described by the Schrödinger and Dirac equations, respectively. Moreover, the dimension of hamiltonian and coupling matrix between lead and cavity are double due to the chiral/sub-lattice degree of freedom. This difference can be viewed by the peculiar form of Dirac billiard hamiltonian:
+The difference between Schrödinger and Dirac billiards remains mainly in the electron behavior described by the Schrödinger and Dirac equations, respectively. Moreover, the dimension of hamiltonian and coupling matrix between lead and cavity are double due to the chiral/sub-lattice degree of freedom. This difference can be viewed by the peculiar form of Dirac billiard hamiltonian [[3]](#3):
 
 <p align="center" width="100%">
     <img width="30%" src="https://user-images.githubusercontent.com/53999015/149149596-7ca5f772-7e74-4896-931c-605de358dac9.png">
 </p>
 
-Here, the T-matrix block of the H-matrix has dimension M x M, where M is the number of resonances.
+Here, the T-matrix block of the H-matrix has dimension M x M, where M is the number of resonances. The random matrix theory establishes that the entries of T-matrix can be chosen as a member of a Gaussian distribution [[4]](#4).
 
 ## Conductance
 
@@ -41,9 +41,9 @@ The β = 4 (green), indicated by literature as "CII", represents a system that S
 
 ## Concurrence
 
-**In this repository**, I analyze the influence of the time-reversal symmetry in the concurrence and entanglement of formation for the Dirac billiard. So I study the concurrence and entanglement of formation produced in the chiral/sub-lattice degree of freedom and compare this production of entangled states when the time-reversal symmetry is broken or preserved. I also obtain the distributions of concurrence and entanglement of formation, as well as the average and variance in terms of the barrier's transparency Γ, recovering numerical and analytical results from the literature [[3]](#3). Comparing Schrödinger and Dirac repositories, the Dirac billiard produces more entanglement pairs than Schrödinger one.
+**In this repository**, I analyze the influence of the time-reversal symmetry in the concurrence and entanglement of formation for the Dirac billiard. So I study the concurrence and entanglement of formation produced in the chiral/sub-lattice degree of freedom and compare this production of entangled states when the time-reversal symmetry is broken or preserved. I also obtain the distributions of concurrence and entanglement of formation, as well as the average and variance in terms of the barrier's transparency Γ, recovering numerical and analytical results from the literature [[5]](#5). Comparing Schrödinger and Dirac repositories, the Dirac billiard produces more entanglement pairs than Schrödinger one.
 
-The concurrence is a property that quantifies the degree of entanglement of a system [[4]](#4) and can be viewed as how much a state of the system can be separated in two states from different subsystems. In this repository we set the number of open channels in each lead as N = 1, the main goal is to study the production of entanglement in chiral/sub-lattice degrees of freedom. 
+The concurrence is a property that quantifies the degree of entanglement of a system [[6]](#6) and can be viewed as how much a state of the system can be separated in two states from different subsystems. In this repository we set the number of open channels in each lead as N = 1, the main goal is to study the production of entanglement in chiral/sub-lattice degrees of freedom. 
 
 ## References
 
@@ -54,9 +54,19 @@ Barros, M. S. M. (2018). Teoria do ruído e fenômenos de interferência quânti
 Barros, M. S. M., Júnior, A. J. N., Macedo-Junior, A. F., Ramos, J. G. G. S., & Barbosa, A. L. R. (2013). Open chaotic Dirac billiards: Weak (anti)localization, conductance fluctuations, and decoherence. Physical Review B, 88(24). doi:10.1103/physrevb.88.245133.
 
 <a id="3">[3]</a>
+Spectrum of the QCD Dirac operator and chiral random matrix theory
+Jacobus Verbaarschot
+Phys. Rev. Lett. 72, 2531 – Published 18 April 1994
+
+<a id="4">[4]</a>
+Universal transport properties of quantum dots with chiral symmetry
+A. F. Macedo-Junior and A. M. S. Macêdo
+Phys. Rev. B 66, 041307(R) – Published 29 July 2002
+
+<a id="5">[5]</a>
 Anomalous entanglement in chaotic Dirac billiards
 J. G. G. S. Ramos, I. M. L. da Silva, and A. L. R. Barbosa
 Phys. Rev. B 90, 245107 – Published 1 December 2014
 
-<a id="4">[4]</a>
+<a id="6">[6]</a>
 W. K. Wootters, Entanglement of formation of an arbitrary state of two qubits, Physical Review Letters 80, 2245 (1998).
