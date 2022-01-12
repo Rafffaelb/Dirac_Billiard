@@ -7,7 +7,7 @@ Hello! My name is Rafael and in this repository I perform numerical simulations 
     <img width="40%" src="https://user-images.githubusercontent.com/53999015/147810879-3242820a-749b-4b06-9f81-92ba5c8cebe9.png">
 </p>
 
-The difference between Schrödinger and Dirac billiards remains mainly in the electron behavior described by the Schrödinger and Dirac equations, respectively. Moreover, the dimension of hamiltonian and coupling matrix between lead and cavity are double due to the chiral/sub-lattice degree of freedom. This difference can be viewed by the peculiar form of Dirac billiard hamiltonian [[3]](#3):
+The difference between Schrödinger and Dirac billiards remains mainly in the electron behavior described by the Schrödinger and Dirac equations, respectively. Moreover, the dimension of hamiltonian and coupling matrix between lead and cavity are double due to the chiral/sub-lattice degree of freedom. This difference of the billiards can be viewed by the peculiar form of Dirac billiard hamiltonian [[3]](#3):
 
 <p align="center" width="100%">
     <img width="30%" src="https://user-images.githubusercontent.com/53999015/149149596-7ca5f772-7e74-4896-931c-605de358dac9.png">
@@ -43,7 +43,7 @@ The β = 4 (green), indicated by literature as "CII", represents a system that S
 
 **In this repository**, I analyze the influence of the time-reversal symmetry in the concurrence and entanglement of formation for the Dirac billiard. So I study the concurrence and entanglement of formation produced in the chiral/sub-lattice degree of freedom and compare this production of entangled states when the time-reversal symmetry is broken or preserved. I also obtain the distributions of concurrence and entanglement of formation, as well as the average and variance in terms of the barrier's transparency Γ, recovering numerical and analytical results from the literature [[5]](#5). Comparing Schrödinger and Dirac repositories, the Dirac billiard produces more entanglement pairs than Schrödinger one.
 
-The concurrence is a property that quantifies the degree of entanglement of a system [[6]](#6) and can be viewed as how much a state of the system can be separated in two states from different subsystems. In this repository I set the number of open channels in each lead as N = 1, the main goal is to study the production of entanglement in chiral/sub-lattice degrees of freedom. 
+The concurrence is a property that quantifies the degree of entanglement of a system [[6]](#6) and can be viewed as how much a state of the system can be separated in two states from different subsystems. In this repository I set the number of open channels in each lead as N = 1, so each lead has two subchannels due to the chiral/sub-lattice degrees of freedom. Therefore, the main goal is to study the entanglement production in these subchannels.
 
 ## Violations of Bell-CHSH Inequality
 
