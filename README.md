@@ -7,7 +7,13 @@ Hello! My name is Rafael and in this repository I perform numerical simulations 
     <img width="40%" src="https://user-images.githubusercontent.com/53999015/147810879-3242820a-749b-4b06-9f81-92ba5c8cebe9.png">
 </p>
 
-The difference between Schrödinger and Dirac billiards remains mainly in the electron behavior described by the Schrödinger and Dirac equations, respectively. Moreover, the dimension of hamiltonian and coupling matrix between lead and cavity are double due to the chiral/sub-lattice degree of freedom.
+The difference between Schrödinger and Dirac billiards remains mainly in the electron behavior described by the Schrödinger and Dirac equations, respectively. Moreover, the dimension of hamiltonian and coupling matrix between lead and cavity are double due to the chiral/sub-lattice degree of freedom. This difference can be viewed by the peculiar form of Dirac billiard hamiltonian:
+
+<p align="center" width="100%">
+    <img width="30%" src="https://user-images.githubusercontent.com/53999015/149149596-7ca5f772-7e74-4896-931c-605de358dac9.png">
+</p>
+
+Here, the T-matrix block of the H-matrix has dimension M x M, where M is the number of resonances.
 
 ## Conductance
 
