@@ -264,3 +264,28 @@ void Chiral_Orthogonal::Save_txt_files_Bell_Parameter_Fixed_Base(MatrixXd Bell_P
 		}
 	}
 }
+
+void Chiral_Orthogonal::Save_txt_files_Correlators_Bell_Inequality_Gamma(MatrixXd Correlator_C11, MatrixXd Correlator_C22, MatrixXd Correlator_C12, MatrixXd Correlator_C21, int num_steps){
+
+	std::ofstream output_Correlator_C11("Data_Analysis/Bell_Parameter/Correlator_Gamma/Dirac_Correlator_C11_O_Gamma.txt");
+	std::ofstream output_Correlator_C22("Data_Analysis/Bell_Parameter/Correlator_Gamma/Dirac_Correlator_C22_O_Gamma.txt");
+	std::ofstream output_Correlator_C12("Data_Analysis/Bell_Parameter/Correlator_Gamma/Dirac_Correlator_C12_O_Gamma.txt");
+	std::ofstream output_Correlator_C21("Data_Analysis/Bell_Parameter/Correlator_Gamma/Dirac_Correlator_C21_O_Gamma.txt");
+
+	for(int i = 0; i < num_steps; i++){
+		for (int j = 0; j < 21; j++){
+			if (j == 20){
+				output_Correlator_C11 << Correlator_C11(i,j) << std::endl;
+				output_Correlator_C22 << Correlator_C22(i,j) << std::endl;
+				output_Correlator_C12 << Correlator_C12(i,j) << std::endl;
+				output_Correlator_C21 << Correlator_C21(i,j) << std::endl;
+			}
+			else{
+				output_Correlator_C11 << Correlator_C11(i,j) << "\t";
+				output_Correlator_C22 << Correlator_C22(i,j) << "\t";
+				output_Correlator_C12 << Correlator_C12(i,j) << "\t";
+				output_Correlator_C21 << Correlator_C21(i,j) << "\t";
+			}
+		}
+	}
+}

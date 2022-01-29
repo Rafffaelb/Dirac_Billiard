@@ -29,3 +29,5 @@ void Chiral::Save_txt_files_Bell_Parameter_Ress(MatrixXd Bell_Parameter_Ress, in
 void Chiral::Save_txt_files_Bell_Parameter_Gamma(MatrixXd Bell_Parameter_Gamma, MatrixXd Bell_Parameter_Dephase_Gamma, int num_steps) {};
 
 void Chiral::Save_txt_files_Bell_Parameter_Fixed_Base(MatrixXd Bell_Parameter_Fixed_Base, int num_steps_aux) {};
+
+void Chiral::Save_txt_files_Correlators_Bell_Inequality_Gamma(MatrixXd Correlator_C11, MatrixXd Correlator_C22, MatrixXd Correlator_C12, MatrixXd Correlator_C21, int num_steps) {};

@@ -17,6 +17,10 @@ class Quantum_chaotic_billiard
 		double _Entanglement;
 		double _Bell_Parameter;
 		double _Bell_Parameter_Dephase;
+		double _Correlator_C11;
+		double _Correlator_C22;
+		double _Correlator_C12;
+		double _Correlator_C21;
 
 		MatrixXcd _H;
 		MatrixXcd _W;
@@ -50,6 +54,13 @@ class Quantum_chaotic_billiard
 		double getBell_Parameter();
 
 		double getBell_Parameter_Dephase();
+
+		void Calculate_Correlators();
+
+		double getCorrelator_C11();
+		double getCorrelator_C22();
+		double getCorrelator_C12();
+		double getCorrelator_C21();
 };
 
 #endif

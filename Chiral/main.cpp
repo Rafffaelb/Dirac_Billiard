@@ -69,6 +69,13 @@ int main(int argc, char **argv){
 					chiral_orthogonal.Run_Simulation_Bell_Parameter_Fixed_Base();
 				}
 
+				if (strcmp(argv[j],"Correlators_Gamma") == 0){
+		
+					cout << "\n ###### Running Orthogonal Correlators C_ij (variable: Gamma) #### \n" << endl;
+					
+					chiral_orthogonal.Run_Simulation_Correlators_Bell_Inequality_Gamma();
+				}
+
 			}
 			chiral_orthogonal.~Chiral_Orthogonal();
 		}
@@ -121,6 +128,13 @@ int main(int argc, char **argv){
 						cout << "\n ##### Running Unitary Bell Parameter Fixed Base ##### \n" << endl;
 
 						chiral_unitary.Run_Simulation_Bell_Parameter_Fixed_Base();
+					}
+
+					if (strcmp(argv[j],"Correlators_Gamma") == 0){
+		
+						cout << "\n ###### Running Unitary Correlators C_ij (variable: Gamma) #### \n" << endl;
+					
+						chiral_unitary.Run_Simulation_Correlators_Bell_Inequality_Gamma();
 					}
 
 				}

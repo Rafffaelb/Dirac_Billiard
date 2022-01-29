@@ -288,3 +288,59 @@ complex<double> Calculate_Noise_Fixed_Base(MatrixXcd r, MatrixXcd t, MatrixXcd U
 
 	return C;
 }
+
+void Quantum_chaotic_billiard::Calculate_Correlators(){
+
+	MatrixXcd r, t;
+
+	MatrixXcd paulimatrix_z(2,2);
+
+	paulimatrix_z << 1, 0,
+			 0, -1;
+
+	int chiral_deg = 2;
+
+	t = _S.block(chiral_deg * _N1, 0, chiral_deg * _N2, chiral_deg * _N1);
+	r = _S.block(0, 0, chiral_deg * _N1, chiral_deg * _N1);
+
+	MatrixXcd rt_dagga;
+
+	rt_dagga = r*t.adjoint();
+
+	complex<double> rt_dagga_11, rt_dagga_22,
+		rt_dagga_12, rt_dagga_21;
+
+	rt_dagga_11 = rt_dagga(0,0);
+	rt_dagga_12 = rt_dagga(0,1);
+	rt_dagga_21 = rt_dagga(1,0);
+	rt_dagga_22 = rt_dagga(1,1);
+
+	_Correlator_C11 = real(rt_dagga_11)*real(rt_dagga_11) + imag(rt_dagga_11)*imag(rt_dagga_11);
+	_Correlator_C12 = real(rt_dagga_12)*real(rt_dagga_12) + imag(rt_dagga_12)*imag(rt_dagga_12);
+	_Correlator_C21 = real(rt_dagga_21)*real(rt_dagga_21) + imag(rt_dagga_21)*imag(rt_dagga_21);
+	_Correlator_C22 = real(rt_dagga_22)*real(rt_dagga_22) + imag(rt_dagga_22)*imag(rt_dagga_22);
+
+
+//	cout << "\nNumerator1: \n" << (_Correlator_C11 + _Correlator_C22 - _Correlator_C12 - _Correlator_C21) << endl;
+//	cout << "\nNumerator2: \n" << (paulimatrix_z*r*t.adjoint()*paulimatrix_z*t*r.adjoint()).trace() << endl;
+
+//	cout << "\nDenominator1: \n" << (_Correlator_C11 + _Correlator_C22 + _Correlator_C12 + _Correlator_C21) << endl;
+//	cout << "\nDenominator2: \n" << (r.adjoint()*r*t.adjoint()*t).trace() << endl;
+
+}
+
+double Quantum_chaotic_billiard::getCorrelator_C11(){
+	return this -> _Correlator_C11;
+}
+
+double Quantum_chaotic_billiard::getCorrelator_C22(){
+	return this -> _Correlator_C22;
+}
+
+double Quantum_chaotic_billiard::getCorrelator_C12(){
+	return this -> _Correlator_C12;
+}
+
+double Quantum_chaotic_billiard::getCorrelator_C21(){
+	return this -> _Correlator_C21;
+}
