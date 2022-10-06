@@ -8,7 +8,6 @@ class Chiral{
 
 	protected:
 
-		int _num_steps;
 		int _spin_deg;
 		int _chiral_deg;
 		double _lambda;
@@ -28,6 +27,8 @@ class Chiral{
 		void Run_Simulation_Bell_Parameter_Gamma();
 		void Run_Simulation_Bell_Parameter_Fixed_Base();
 		void Run_Simulation_Correlators_Bell_Inequality_Gamma();
+		void Run_Simulation_Conductance_Energy();
+		void Run_Simulation_Conductance_Energy_Gamma();
 
 		virtual void Create_H(MatrixXcd* H_pointer, int _ress, double _lambda) = 0;
 
@@ -40,6 +41,7 @@ class Chiral{
 		virtual void Save_txt_files_Bell_Parameter_Gamma(MatrixXd Bell_Parameter_Gamma, MatrixXd Bell_Parameter_Dephase_Gamma, int num_steps) = 0;
 		virtual void Save_txt_files_Bell_Parameter_Fixed_Base(MatrixXd Bell_Parameter_Fixed_Base, int num_steps) = 0;
 		virtual void Save_txt_files_Correlators_Bell_Inequality_Gamma(MatrixXd Correlator_C11, MatrixXd Correlator_C22, MatrixXd Correlator_C12, MatrixXd Correlator_C21, int num_steps) = 0;
-
+		virtual void Save_txt_files_Energy(MatrixXcd G, int num_steps, int N1) = 0;
+		virtual void Save_txt_files_Energy_Gamma(MatrixXcd G, int num_steps, int N1, int gamma_idx) = 0;
 };
 #endif

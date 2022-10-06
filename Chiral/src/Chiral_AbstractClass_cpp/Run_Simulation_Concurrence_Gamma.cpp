@@ -14,9 +14,10 @@ void Chiral::Run_Simulation_Concurrence_Gamma(){
 	auto start = chrono::system_clock::now();
 
 	double Gamma, y;
-       	int ress, N1, N2, n;
+       	int ress, N1, N2, n, _num_steps;
 
 	ress = 100;
+	_num_steps = 1000000;
 
 	N1 = 1;
 	N2 = N1;
@@ -74,7 +75,7 @@ void Chiral::Run_Simulation_Concurrence_Gamma(){
 			
 			// Scattering Matrix //
 		
-			billiard_setup.Calculate_Smatrix();
+			billiard_setup.Calculate_Smatrix(0);
 
 			// Concurrence //
 		

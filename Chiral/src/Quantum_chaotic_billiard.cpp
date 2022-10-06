@@ -29,7 +29,9 @@ void Quantum_chaotic_billiard::Set_Setup(MatrixXcd H, MatrixXcd W, MatrixXcd C1,
 	_N2 = N2;
 }
 
-void Quantum_chaotic_billiard::Calculate_Smatrix(){
+void Quantum_chaotic_billiard::Calculate_Smatrix(double Energy){
+
+	int chiral_deg = 2;
 
 	complex<double> number_2(2,0);
 	complex<double> complex_identity(0,1);
@@ -43,7 +45,7 @@ void Quantum_chaotic_billiard::Calculate_Smatrix(){
 
 	MatrixXcd D(_H.rows(), _H.cols());
 
-	D << (-_H + complex_identity*M_PI*_W*(_W.adjoint()));
+	D << (Energy*MatrixXcd::Identity(ress, ress) -_H + complex_identity*M_PI*_W*(_W.adjoint()));
 	PartialPivLU<MatrixXcd> lu(D);
 	MatrixXcd D_inv_W = lu.inverse()*_W;
 

@@ -33,7 +33,7 @@ class Quantum_chaotic_billiard
 
 		void Set_Setup(MatrixXcd H, MatrixXcd W, MatrixXcd C1, MatrixXcd C2, int N1, int N2);
 
-		void Calculate_Smatrix();
+		void Calculate_Smatrix(double Energy);
 
 		void Calculate_G_and_P();
 

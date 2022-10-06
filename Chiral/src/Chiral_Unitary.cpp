@@ -12,10 +12,9 @@
 
 using namespace std;
 
-Chiral_Unitary::Chiral_Unitary(double lambda, int num_steps, int spin_deg, int chiral_deg){
+Chiral_Unitary::Chiral_Unitary(double lambda, int spin_deg, int chiral_deg){
 
 	this -> _lambda = lambda;
-	this -> _num_steps = num_steps;
 	this -> _spin_deg = spin_deg;
 	this -> _chiral_deg = chiral_deg;
 }
@@ -292,6 +291,38 @@ void Chiral_Unitary::Save_txt_files_Correlators_Bell_Inequality_Gamma(MatrixXd C
 				output_Correlator_C22 << Correlator_C22(i,j) << "\t";
 				output_Correlator_C12 << Correlator_C12(i,j) << "\t";
 				output_Correlator_C21 << Correlator_C21(i,j) << "\t";
+			}
+		}
+	}
+}
+
+void Chiral_Unitary::Save_txt_files_Energy(MatrixXcd G, int num_steps, int N1){
+
+	std::ofstream output_G("Data_Analysis/Energy/Energy_Gamma/Dirac_G_U_Gamma_N"+to_string(N1)+".txt");
+
+	for(int i = 0; i < num_steps; i++){
+		for (int j = 0; j < 101; j++){
+			if (j == 100){
+				output_G << G(i,j).real() << std::endl;
+			}
+			else{
+				output_G << G(i,j).real() << "\t";
+			}
+		}
+	}
+}
+
+void Chiral_Unitary::Save_txt_files_Energy_Gamma(MatrixXcd G, int num_steps, int N1, int gamma_idx){
+
+	std::ofstream output_G("Data_Analysis/Energy/Energy_Gamma/Dirac_G_U_Gamma_N"+to_string(N1)+"_"+to_string(gamma_idx)+".txt");
+
+	for(int i = 0; i < num_steps; i++){
+		for (int j = 0; j < 101; j++){
+			if (j == 100){
+				output_G << G(i,j).real() << std::endl;
+			}
+			else{
+				output_G << G(i,j).real() << "\t";
 			}
 		}
 	}

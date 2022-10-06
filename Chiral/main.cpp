@@ -11,11 +11,10 @@ using namespace std;
 int main(int argc, char **argv){
 
 	double lambda;
-	int num_steps, spin_deg, chiral_deg;
+	int spin_deg, chiral_deg;
 
 	lambda = 0.5;
 	chiral_deg = 2;
-	num_steps = 1000000;
 
 	for (int i = 1; i < argc; i++){
 		
@@ -23,7 +22,7 @@ int main(int argc, char **argv){
 		
 			spin_deg = 1;
 			
-			Chiral_Orthogonal chiral_orthogonal(lambda, num_steps, spin_deg, chiral_deg);
+			Chiral_Orthogonal chiral_orthogonal(lambda, spin_deg, chiral_deg);
 
 			for (int j = 1; j < argc; j++){
 				
@@ -76,6 +75,20 @@ int main(int argc, char **argv){
 					chiral_orthogonal.Run_Simulation_Correlators_Bell_Inequality_Gamma();
 				}
 
+				if (strcmp(argv[j],"Energy") == 0){
+
+					cout << "\n ##### Running Orthogonal (variable: Energy) ###### \n" << endl;
+
+					chiral_orthogonal.Run_Simulation_Conductance_Energy();
+				}
+
+				if (strcmp(argv[j],"Energy_Gamma") == 0){
+
+					cout << "\n ##### Running Orthogonal (variables: Energy, Gamma) ###### \n" << endl;
+
+					chiral_orthogonal.Run_Simulation_Conductance_Energy_Gamma();
+				}
+
 			}
 			chiral_orthogonal.~Chiral_Orthogonal();
 		}
@@ -84,7 +97,7 @@ int main(int argc, char **argv){
 				
 				spin_deg = 1;
 
-				Chiral_Unitary chiral_unitary(lambda, num_steps, spin_deg, chiral_deg);
+				Chiral_Unitary chiral_unitary(lambda, spin_deg, chiral_deg);
 
 				for (int j = 1; j < argc; j++){
 
@@ -137,6 +150,21 @@ int main(int argc, char **argv){
 						chiral_unitary.Run_Simulation_Correlators_Bell_Inequality_Gamma();
 					}
 
+					if (strcmp(argv[j],"Energy") == 0){
+
+						cout << "\n ##### Running Unitary (variable: Energy) ###### \n" << endl;
+
+						chiral_unitary.Run_Simulation_Conductance_Energy();
+					}
+					
+					if (strcmp(argv[j],"Energy_Gamma") == 0){
+
+						cout << "\n ##### Running Unitary (variables: Energy, Gamma) ###### \n" << endl;
+		
+						chiral_unitary.Run_Simulation_Conductance_Energy_Gamma();
+					}
+
+
 				}
 				chiral_unitary.~Chiral_Unitary();
 			}
@@ -145,7 +173,7 @@ int main(int argc, char **argv){
 				
 					spin_deg = 2;
 
-					Chiral_Symplectic chiral_symplectic(lambda, num_steps, spin_deg, chiral_deg);
+					Chiral_Symplectic chiral_symplectic(lambda, spin_deg, chiral_deg);
 
 					for (int j = 1; j < argc; j++){
 
