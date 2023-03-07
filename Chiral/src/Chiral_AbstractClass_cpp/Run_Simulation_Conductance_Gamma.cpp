@@ -17,10 +17,10 @@ void Chiral::Run_Simulation_Conductance_Gamma(){
        	int ress, N1, N2, n, _num_steps;
 
 	ress = 100;
-	_num_steps = 100000;
+	_num_steps = 1000000;
 	V = _lambda*_lambda/ress;
 
-	for (int i = 1; i < 5; i++){
+	for (int i = 2; i < 5; i++){
 
 		if (i == 4){
 			N1 = 10;
